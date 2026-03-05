@@ -18,6 +18,7 @@ body{
     radial-gradient(ellipse 1100px 500px at 20% 5%,  rgba(84,130,255,.18), transparent 60%),
     radial-gradient(ellipse 800px 500px  at 80% 95%, rgba(0,255,198,.12),  transparent 60%),
     var(--bg);
+  background-attachment: fixed;
   color:var(--text);
   min-height:100%;
   overflow-x: hidden;
