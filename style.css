@@ -20,6 +20,7 @@ body{
     var(--bg);
   color:var(--text);
   min-height:100%;
+  overflow-x: hidden;
 }
 
 /* ── Layout ── */
@@ -86,6 +87,20 @@ body{
   .wrap{ padding: 18px 12px 40px; }
 }
 
+@media(max-width:600px){
+  /* Action buttons: 2-column grid, Girar spans full width */
+  .actions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    justify-items: stretch;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .spin-btn{ grid-column: span 2; }
+  .actions .btn{ width: 100%; }
+}
+
 @media(max-width:480px){
   .card{ padding: 14px 12px; }
   .header-top{ gap: 10px; }
@@ -94,21 +109,19 @@ body{
   .stats{ gap: 14px; }
   .stat-num{ font-size: 22px; }
 
-  /* Action buttons: 2-column grid, Girar spans full width */
-  .actions{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    justify-items: stretch;
-  }
-  .spin-btn{ grid-column: span 2; }
-  .actions .btn{ width: 100%; justify-content: center; }
-
   /* Load card row wraps centered */
   .load-card .row{ justify-content: center; }
 
-  /* Wheel sizing on very small screens */
-  #wheelCanvas{ max-width: min(420px, 94vw); }
+  /* Prevent iOS Safari from zooming on input focus */
+  .manual-input{ font-size: 16px; }
+
+  /* Scale pointer to match smaller wheel */
+  .pointer-wrap{ right: -10px; }
+  .pointer-arrow{
+    border-top:    11px solid transparent;
+    border-bottom: 11px solid transparent;
+    border-right:  17px solid #fff;
+  }
 }
 
 /* ── Stats ── */
@@ -259,8 +272,9 @@ body{
 /* Canvas */
 #wheelCanvas{
   display: block;
-  max-width: min(420px, 90vw);
+  max-width: 420px;
   height: auto;
+  aspect-ratio: 1;
   border-radius: 50%;
   box-shadow: 0 0 0 5px rgba(255,255,255,.08),
               0 0 40px rgba(84,130,255,.2),

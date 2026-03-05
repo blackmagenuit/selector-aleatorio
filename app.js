@@ -267,7 +267,8 @@ function drawWheel(rot){
 
   // ── HiDPI / Retina scaling ──────────────────────────────
   const dpr  = window.devicePixelRatio || 1;
-  const SIZE = 420;                          // logical CSS pixels
+  // Fit wheel inside the card on any screen (56px = wrap + card padding × 2)
+  const SIZE = Math.min(420, Math.max(160, document.documentElement.clientWidth - 56));
   if(canvas.width !== SIZE * dpr || canvas.height !== SIZE * dpr){
     canvas.width        = SIZE * dpr;
     canvas.height       = SIZE * dpr;
@@ -731,6 +732,9 @@ els.langBtn.addEventListener("click", () => {
 });
 
 els.allDoneClose.addEventListener("click", hideAllDone);
+
+// Redraw wheel on orientation change / resize
+window.addEventListener("resize", () => { if(!isSpinning) drawWheel(rotation); });
 
 // ── Init ──────────────────────────────────────────────────────
 load();
